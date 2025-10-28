@@ -20,6 +20,19 @@ public class Deck {
         java.util.Collections.shuffle(cards);
     }
 
+    public void skipCard(){
+        if (!cards.isEmpty()){
+            cards.add(cards.remove(0));
+        }
+    }
+
+    public Card peekCard(){
+        if (cards.isEmpty()){
+            return null;
+        }
+        return cards.get(0);
+    }
+
     public Card deal(){
         if (cards.isEmpty()){
             return null;
