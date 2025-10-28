@@ -60,19 +60,25 @@ public class BlackJackGame {
             player.showHand();
         }
 
-        // Deal to dealer, making sure that dealer always gets an ace and a royal
+        // Deal to dealer, making sure that dealer always gets blackjack or a 20
 
-        while (deck.peekCard().getRank() != 'A') {
+        while (deck.peekCard().getRank() != 'A' && deck.peekCard().getRank() != '0' && 
+        deck.peekCard().getRank() != 'K' && deck.peekCard().getRank() != 'Q' && 
+        deck.peekCard().getRank() != 'J') {
             deck.skipCard();
         }
         dealer.drawCard(deck.deal());
+        System.out.println("dealer draw 1 done");
 
-        while (deck.peekCard().getRank() != 'K' && deck.peekCard().getRank() != 'Q' && deck.peekCard().getRank() != '0' ) {
+        while (deck.peekCard().getRank() != 'A' && deck.peekCard().getRank() != '0' && 
+        deck.peekCard().getRank() != 'K' && deck.peekCard().getRank() != 'Q' && 
+        deck.peekCard().getRank() != 'J') {
             deck.skipCard();
         }
         dealer.drawCard(deck.deal());
+        System.out.println("dealer initial draw done");
         dealer.showInitialHand();
-        //dealer.showHand();
+        // dealer.showHand();
         
         checkInitialBlackjack();
     }
