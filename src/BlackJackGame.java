@@ -52,6 +52,33 @@ public class BlackJackGame {
             activePlayers.add(player);
         }
     }
+    // ensure dealer always gets blackjack or 20
+    public void initalDealerDeal(){
+        boolean ace = false;
+        while (deck.peekCard().getRank() != 'A' && deck.peekCard().getRank() != '0' && 
+        deck.peekCard().getRank() != 'K' && deck.peekCard().getRank() != 'Q' && 
+        deck.peekCard().getRank() != 'J') {
+            deck.skipCard();
+        }
+        if (deck.peekCard().getRank() == 'A'){
+            ace = true;
+        }
+        dealer.drawCard(deck.deal());
+
+        if (!ace){
+            while (deck.peekCard().getRank() != 'A' && deck.peekCard().getRank() != '0' && 
+            deck.peekCard().getRank() != 'K' && deck.peekCard().getRank() != 'Q' && 
+            deck.peekCard().getRank() != 'J') {
+                deck.skipCard();
+            }
+        } else {
+            while (deck.peekCard().getRank() != '0' && 
+            deck.peekCard().getRank() != 'K' && deck.peekCard().getRank() != 'Q' && 
+            deck.peekCard().getRank() != 'J') {
+                deck.skipCard();
+            }
+        }
+    }
 
     public void initialDeal() {
         for (Player player : players) {
@@ -61,22 +88,7 @@ public class BlackJackGame {
         }
 
         // Deal to dealer, making sure that dealer always gets blackjack or a 20
-
-        while (deck.peekCard().getRank() != 'A' && deck.peekCard().getRank() != '0' && 
-        deck.peekCard().getRank() != 'K' && deck.peekCard().getRank() != 'Q' && 
-        deck.peekCard().getRank() != 'J') {
-            deck.skipCard();
-        }
-        dealer.drawCard(deck.deal());
-        System.out.println("dealer draw 1 done");
-
-        while (deck.peekCard().getRank() != 'A' && deck.peekCard().getRank() != '0' && 
-        deck.peekCard().getRank() != 'K' && deck.peekCard().getRank() != 'Q' && 
-        deck.peekCard().getRank() != 'J') {
-            deck.skipCard();
-        }
-        dealer.drawCard(deck.deal());
-        System.out.println("dealer initial draw done");
+        initalDealerDeal();
         dealer.showInitialHand();
         // dealer.showHand();
         
